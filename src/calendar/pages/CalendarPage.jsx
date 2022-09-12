@@ -10,6 +10,7 @@ import {
 import { localizer, getMessagesES } from "../../helpers";
 import { useState } from "react";
 import { useUiStore, useCalendarStore } from "../../hooks";
+import { useEffect } from "react";
 
 // El evento lo único que pide como obligatorio es el titulo, fecha de inicio y fecha fin
 
@@ -20,7 +21,12 @@ export const CalendarPage = () => {
     localStorage.getItem("lastView") || "week"
   );
 
-  const { events, setActiveEvent, hasEventSelected } = useCalendarStore();
+  const { events, setActiveEvent, hasEventSelected, startLoadingEvents } =
+    useCalendarStore();
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {

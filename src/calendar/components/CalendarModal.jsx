@@ -144,6 +144,7 @@ export const CalendarModal = () => {
             rows="5"
             name="notes"
             value={formValues.notes}
+            onChange={onInputChange}
           ></textarea>
           <small id="emailHelp" className="form-text text-muted">
             Información adicional
