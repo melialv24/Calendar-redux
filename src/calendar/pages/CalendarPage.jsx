@@ -1,30 +1,35 @@
 import { Calendar } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { CalendarEvent, CalendarModal, Navbar } from "../components";
-import { addHours } from "date-fns";
+import {
+  CalendarEvent,
+  CalendarModal,
+  FabAddNew,
+  FabDelete,
+  Navbar,
+} from "../components";
 import { localizer, getMessagesES } from "../../helpers";
 import { useState } from "react";
+import { useUiStore, useCalendarStore } from "../../hooks";
+import { useEffect } from "react";
 
 // El evento lo único que pide como obligatorio es el titulo, fecha de inicio y fecha fin
-const events = [
-  {
-    title: "Cumple de melissa",
-    notes: "HAY QUE COMPRAR ALGO",
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: "#fafa",
-    user: {
-      _id: "123",
-      name: "Melissa",
-    },
-  },
-];
 
 export const CalendarPage = () => {
+<<<<<<< HEAD
+=======
+  const { openDateModal } = useUiStore();
+>>>>>>> fa2431f9515c73df603d7bb489c986c17c3cfc3f
 
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "week"
   );
+
+  const { events, setActiveEvent, hasEventSelected, startLoadingEvents } =
+    useCalendarStore();
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
@@ -38,11 +43,11 @@ export const CalendarPage = () => {
   };
 
   const onDoubleClick = (event) => {
-    console.log({ doubleClick: event });
+    openDateModal();
   };
 
   const onSelect = (event) => {
-    console.log({ click: event });
+    setActiveEvent(event);
   };
 
   const onViewChanged = (event) => {
@@ -67,6 +72,9 @@ export const CalendarPage = () => {
         onSelectEvent={onSelect}
         onView={onViewChanged}
       />
+      <FabAddNew />
+
+      <FabDelete />
       <CalendarModal />
     </>
   );
