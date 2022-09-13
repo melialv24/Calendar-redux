@@ -21,7 +21,6 @@ const events = [
 ];
 
 export const CalendarPage = () => {
-  const [isOpen, setIsOpen] = useState(true);
 
   const [lastView, setLastView] = useState(
     localStorage.getItem("lastView") || "week"
